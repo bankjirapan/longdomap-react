@@ -2,31 +2,37 @@
   "name": "react-longdo-map",
   "version": "1.0.0",
   "description": "Easy-to-use React component for Longdo Map.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
-    "build": "tsc && cp src/LongdoMap.tsx dist/ && cp src/index.ts dist/",
+    "build": "tsup src/index.ts --dts --format esm,cjs",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0"
   },
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/react": "^18.0.0"
+    "@types/react": "^18.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.0.0"
   },
   "author": "longdo",
   "license": "MIT",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/yourname/react-longdo-map"
-  }
+    "type": "git"
+  },
+  "keywords": [
+    "react",
+    "longdo",
+    "longdo-map",
+    "map",
+    "react-component"
+  ]
 }
