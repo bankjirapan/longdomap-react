@@ -18,12 +18,6 @@ export interface LongdoGeometryProps {
     options?: any;
 }
 
-declare global {
-    interface Window {
-        longdo: any;
-    }
-}
-
 function isValidPoints(points: any): points is { lon: number; lat: number }[] {
     return (
         Array.isArray(points) &&

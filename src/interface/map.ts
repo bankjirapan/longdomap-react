@@ -1,3 +1,11 @@
+
+declare global {
+    interface Window {
+        longdo: any;
+    }
+}
+
+
 export interface Map {
     zoom: (zoomLevel: number) => void;
     location: (location: { lon: number; lat: number }, animate?: boolean) => void;
