@@ -11,10 +11,58 @@ import { useEffect, useRef } from "react";
  */
 
 export interface LongdoGeometryProps {
+    /**
+    * 
+     * The Longdo map instance where the popup will be displayed.
+     * This is required to add the popup overlay to the map.
+     * 
+     */
     map?: any;
+    /**
+     * The type of geometry to render.
+     * Supported types are "polyline", "polygon", "circle", "dot", "donut", and "rectangle".
+     * 
+     * @example
+     * ```tsx
+     * <Geometry type="polyline" points={[{ lon: 100.0, lat: 13.0 }, { lon: 101.0, lat: 14.0 }]} />
+     * ```
+     */
     type: "polyline" | "polygon" | "circle" | "dot" | "donut" | "rectangle";
+    /**
+     * An array of coordinate objects representing the geometry's vertices.
+     *  Each point should contain `lon` (longitude) and `lat` (latitude).
+     * Null values are allowed for optional points, such as in donuts.
+     * @example
+     * ```tsx
+     * <Geometry type="polygon" points={[{ lon: 100.0, lat: 13.0 }, { lon: 101.0, lat: 14.0 }, null]} />
+     * ```
+     */
     points: ({ lon: number; lat: number } | null)[];
+    /**
+     * The radius of the geometry, used for types like "circle" or "donut".
+     * This is optional and should be specified in the same units as the map's coordinate system.
+     * @example
+     * ```tsx
+     * <Geometry type="circle" points={[{ lon: 100.0, lat: 13.0 }]} radius={500} />
+     * ```
+     */
     radius?: number;
+    /**
+     * Additional options for customizing the geometry's appearance or behavior.
+     * This can include properties like color, weight, opacity, etc., depending on the geometry type.
+     * @example
+     * ```tsx
+     * options={
+     * {  
+     *      lineColor: 'rgba(0, 0, 0, 1)'
+     *      lineWidth: 5,
+     *      title: 'My Polyline',
+     *      detail: 'This is a detailed description of the polyline.',
+     *      visibleRange: { min: 5, max: 15 }
+     * }
+     * />
+     * ```
+     */
     options?: any;
 }
 
@@ -39,7 +87,7 @@ function isValidPoints(points: any): points is { lon: number; lat: number }[] {
  * 
  * @param {LongdoGeometryProps} props - The properties for the geometry component.
  * @returns {null} - This component does not render any visible elements, it only manages map overlays.
- */ 
+ */
 export const Geometry: React.FC<LongdoGeometryProps> = ({
     map,
     type,

@@ -21,9 +21,18 @@ export interface LongdoMapProps {
      */
     location?: { lon: number; lat: number; };
     /**
+     * The base map to use for the Longdo Map.
+     * This can be set to a specific map type, such as "NORMAL", "DARK", or "hybrid".
+     * If not specified, the default base map will be used.
+     * @example
+     * <LongdoMap baseMap="NORMAL" />
+     */
+    baseMap?: string;
+    /**
      * The initial zoom level of the map.
      * Default is set to 10.
      */
+
     zoom?: number;
     /**
      * The height of the map container.
@@ -67,22 +76,18 @@ function loadLongdoMapScript(apiKey: string): Promise<void> {
 
 
 /**
- * LongdoMap is a React component that integrates the Longdo Map JavaScript SDK into your application.
- * It handles loading the Longdo Map script, initializing the map, and providing a container for map overlays such as markers, geometries, and popups.
- * The component supports configuration of initial map location, zoom level, container dimensions, and custom class names.
- * It also provides a callback to access the underlying Longdo map object once it is ready, enabling advanced interactions.
+ * Properties for configuring the LongdoMap component.
  * 
- * @param {LongdoMapProps} props - The properties for configuring the LongdoMap component.
- * @param {string} props.apiKey - The API key required to use the Longdo Map service. This key is mandatory and must be provided to access the map functionalities.
- * @param {(map: any) => void} [props.mapObj] - A callback function that receives the Longdo map object once it is ready. This can be used to interact with the map after it has been initialized.
- * @param {{ lon: number; lat: number; }} [props.location] - The initial location of the map, specified by longitude and latitude. Default is set to Bangkok, Thailand.
- * @param {number} [props.zoom] - The initial zoom level of the map. Default is set to 10.
- * @param {string | number} [props.height] - The height of the map container. Can be specified as a string (e.g., "400px") or a number (e.g., 400). Default is set to 400.
- * @param {string | number} [props.width] - The width of the map container. Can be specified as a string (e.g., "100%") or a number (e.g., 600). Default is set to "100%".
- * @param {string} [props.className] - An optional CSS class name to apply to the map container. This can be used for custom styling.
- * @param {ReactNode} [props.children] - Optional children components to render on the map. These can include markers, geometries, or popups.
-
- */
+ * @property {string} apiKey - The API key required to use the Longdo Map service. This key is mandatory and must be provided to access the map functionalities.
+ * @property {(map: any) => void} [mapObj] - A callback function that receives the Longdo map object once it is ready. This can be used to interact with the map after it has been initialized.
+ * @property {{ lon: number; lat: number; }} [location] - The initial location of the map, specified by longitude and latitude. Default is set to Bangkok, Thailand.
+ * @property {number} [zoom] - The initial zoom level of the map. Default is set to 10.
+ * @property {string | number} [height] - The height of the map container. Can be specified as a string (e.g., "400px") or a number (e.g., 400). Default is set to 400.
+ * @property {string | number} [width] - The width of the map container. Can be specified as a string (e.g., "100%") or a number (e.g., 600). Default is set to "100%".
+ * @property {string} [className] - An optional CSS class name to apply to the map container. This can be used for custom styling.
+ * @property {ReactNode} [children] - Optional children components to render on the map. These can include markers, geometries, or popups.
+ * @property {string} [baseMap] - The base map to use for the Longdo Map. This can be set to a specific map type, such as "basic", "satellite", or "hybrid". If not specified, the default base map will be used. You can see the list of bese maps at https://api.longdo.com/map3/doc.html#Layers
+ * */
 export const LongdoMap: React.FC<LongdoMapProps> = ({
     apiKey,
     mapObj,
@@ -91,6 +96,7 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
     height = 400,
     width = "100%",
     className = "",
+    baseMap = "NORMAL",
     children,
 }) => {
     const mapContainer = useRef<HTMLDivElement>(null);
@@ -103,6 +109,7 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
             if (mapContainer.current && window.longdo && !mapRef.current) {
                 mapRef.current = new window.longdo.Map({
                     placeholder: mapContainer.current,
+                    layer: [window.longdo.Layers[baseMap] || window.longdo.Layers.NORMAL],
                     lastview: false,
                     location: { lon: location.lon, lat: location.lat },
                     zoom: zoom,
