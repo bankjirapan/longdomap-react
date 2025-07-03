@@ -1,5 +1,5 @@
 {
-  "name": "longdo-map-react",
+  "name": "react-longdo-map",
   "version": "1.0.0",
   "description": "Easy-to-use React component for Longdo Map.",
   "main": "./dist/index.cjs",
