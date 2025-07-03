@@ -5,10 +5,6 @@ export interface LongdoPopupProps {
      * The Longdo map instance where the popup will be displayed.
      * This is required to add the popup overlay to the map.
      */
-    /**
-     * The Longdo map instance where the popup will be displayed.
-     * This is required to add the popup overlay to the map.
-     */
     map?: any;
     /**
      * The HTML content of the popup.
@@ -24,7 +20,6 @@ export interface LongdoPopupProps {
      * The title of the popup.
      * @default 'Popup'
      * The title is displayed at the top of the popup.
-
      */
     title?: string;
     /**
@@ -46,11 +41,6 @@ export interface LongdoPopupProps {
      * 
      */
     closable?: boolean;
-    /**
-     * The size of the popup.
-     * It should be an object with `width` and `height` properties.
-     * @default { width: 200, height: 100 }
-     */
     /**
      * The size of the popup.
      * It should be an object with `width` and `height` properties.
