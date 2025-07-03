@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, ReactNode, cloneElement } from "react";
 import { LongdoMarkerProps } from "./components/LongdoMarker";
+import { LongdoGeometryProps } from "./components/LongdoGeometry";
 
 declare global {
     interface Window {
@@ -90,11 +91,11 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
             className={className}
             style={{ height, width, position: "relative" }}
         >
-            {isReady && React.Children.map(children, (child) =>
-                React.isValidElement(child)
-                    ? cloneElement(child, { map: mapRef.current } as Partial<LongdoMarkerProps>)
-                    : child
-            )}
+            {isReady && React.Children.map(children, (child) => {
+                if (!React.isValidElement(child)) return child;
+                const props: Partial<LongdoMarkerProps & LongdoGeometryProps> = { map: mapRef.current };
+                return cloneElement(child, props);
+            })}
         </div>
     );
 };
