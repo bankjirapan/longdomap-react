@@ -24,9 +24,6 @@ export interface LongdoTagProps {
  * @function LongdoTag
  * @description
  * The `LongdoTag` component is used to add a tag to the Longdo map.
- * @param {LongdoTagProps} props - The properties for the LongdoTag component.
- * @param {any} props.map - The Longdo map object to which the tag will be applied.
- * @param {string} props.tagName - The name of the tag to be added to the map.
  * @returns null
  */
 export const LongdoTag = ({ map, tagName }: LongdoTagProps) => {
