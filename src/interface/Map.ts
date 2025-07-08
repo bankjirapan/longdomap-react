@@ -24,7 +24,7 @@ export interface Map {
    * ```
    * @returns
    */
-  zoom: (zoomLevel?: number | boolean, zoomIn?: boolean) => void;
+  zoom: (zoomLevel?: number | boolean, zoomIn?: boolean) => void | number;
   /**
    * @property location
    * @description
@@ -34,7 +34,10 @@ export interface Map {
    * @param location - An object containing longitude (lon) and latitude (lat).
    * @param animate - A boolean indicating whether to animate the transition.
    */
-  location: (location: { lon: number; lat: number }, animate?: boolean) => void;
+  location: (
+    location?: { lon: number; lat: number },
+    animate?: boolean
+  ) => void | { lon: number; lat: number };
   Overlays: {
     add: (overlay: any) => void;
     remove: (overlay: any) => void;

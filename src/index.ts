@@ -4,4 +4,5 @@ export { Geometry, LongdoGeometryProps } from "./components/LongdoGeometry";
 export { Popup, LongdoPopupProps } from "./components/LongdoPopup";
 export { Layer, LongdoLayerProps } from "./components/LongdoLayer"
 export { LongdoTag, LongdoTagProps } from "./components/LongdoTag";
-export { Map } from "./interface/map";
+export { Map } from "./interface/Map";
+export { EventName } from "./interface/Event";
