@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState, ReactNode, cloneElement } from "react";
-import { LongdoMarkerProps } from "./components/LongdoMarker";
+import { LongdoMarkerProps } from "./interface/Marker";
 import { LongdoGeometryProps } from "./components/LongdoGeometry";
 import { LongdoPopupProps } from "./components/LongdoPopup";
 

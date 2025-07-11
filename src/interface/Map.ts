@@ -1,3 +1,5 @@
+import { EventName, LocationMode } from "./Event";
+
 declare global {
   interface Window {
     longdo: any;
@@ -35,15 +37,31 @@ export interface Map {
    * @param animate - A boolean indicating whether to animate the transition.
    */
   location: (
-    location?: { lon: number; lat: number },
+    location?: { lon: number; lat: number } | LocationMode,
     animate?: boolean
   ) => void | { lon: number; lat: number };
+
+  /**
+   * @property Overlays
+   * @description
+   * Provides methods to manage overlays on the map.
+   * - `add(overlay: any)`: Adds an overlay to the map.
+   * - `remove(overlay: any)`: Removes an overlay from the map.
+   * - `clear()`: Clears all overlays from the map.
+   * @example
+   * ```ts
+   * map.Overlays.add(marker);
+   * map.Overlays.remove(marker);
+   * map.Overlays.clear();
+   * ```  
+   */
   Overlays: {
     add: (overlay: any) => void;
     remove: (overlay: any) => void;
+    clear: () => void;
   };
   Event: {
-    bind: (eventName: string, callback: () => void) => void;
+    bind: (eventName: EventName | string, callback: (event: any) => void) => void;
   };
   Layers: {
     setBase: (layer: string) => void;
