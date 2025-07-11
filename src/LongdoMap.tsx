@@ -134,15 +134,11 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
             setIsReady(false);
         };
     }, [])
-    useEffect(() => {
-        if (isReady && mapRef.current && typeof mapObj === "function") {
-            mapObj(mapRef.current);
-        }
-    }, [isReady, mapObj]);
 
     return (
         <div
             ref={mapContainer}
+            data-testid="longdo-map"
             className={className}
             style={{ height, width, position: "relative" }}
         >
