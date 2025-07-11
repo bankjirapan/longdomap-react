@@ -13,13 +13,20 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --dts --format esm,cjs",
+    "test": "jest",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^14.3.1",
+    "@types/jest": "^30.0.0",
     "@types/react": "^18.0.0",
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "ts-jest": "^29.4.0",
     "tsup": "^8.5.0",
     "typescript": "^5.0.0"
   },
