@@ -6,9 +6,15 @@ declare global {
   }
 }
 
+/**
+ * @interface Map
+ * @description
+ * Interface for interacting with the Longdo Map instance.
+ * Provides methods and properties for controlling map view, overlays, events, layers, tags, UI, language, and more.
+ */
 export interface Map {
   /**
-   * @property zoom
+   * @function zoom
    * @description
    * Zooms the map to a specified level or zooms in/out based on the boolean value.
    * If zoomLevel is a number, it sets the zoom level directly.
@@ -24,17 +30,21 @@ export interface Map {
    * map.zoom(true,true); // Zooms in by one level
    * map.zoom(false,true); // Zooms out by one level
    * ```
-   * @returns
+   * @returns {void|number} Returns the current zoom level if called without arguments, otherwise void.
    */
   zoom: (zoomLevel?: number | boolean, zoomIn?: boolean) => void | number;
+
   /**
-   * @property location
+   * @function location
    * @description
-   * Sets the map's location to the specified longitude and latitude.
+   * Sets or gets the map's location.
+   * If called with a location, sets the map's location to the specified longitude and latitude.
    * If animate is `true`, it animates the transition to the new location.
    * If animate is `false` or not provided, it sets the location immediately without animation.
-   * @param location - An object containing longitude (lon) and latitude (lat).
+   * If called without arguments, returns the current location.
+   * @param location - An object containing longitude (lon) and latitude (lat), or a LocationMode.
    * @param animate - A boolean indicating whether to animate the transition.
+   * @returns {void|{ lon: number; lat: number }} Returns the current location if called without arguments, otherwise void.
    */
   location: (
     location?: { lon: number; lat: number } | LocationMode,
@@ -56,12 +66,26 @@ export interface Map {
    * ```
    */
   Overlays: {
+    /**
+     * @function add
+     * @description Adds an overlay to the map.
+     * @param overlay - The overlay object to add.
+     */
     add: (overlay: any) => void;
+    /**
+     * @function remove
+     * @description Removes an overlay from the map.
+     * @param overlay - The overlay object to remove.
+     */
     remove: (overlay: any) => void;
+    /**
+     * @function clear
+     * @description Removes all overlays from the map.
+     */
     clear: () => void;
   };
+
   /**
-   *
    * @property Event
    * @description
    * Provides methods to bind events to the map.
@@ -72,14 +96,22 @@ export interface Map {
    * ```ts
    * map.Event.bind(EventName.Click, (event) => {
    *   console.log('Map clicked at:', event.location);
-   *
+   * });
+   * ```
    */
   Event: {
+    /**
+     * @function bind
+     * @description Binds an event to the map.
+     * @param eventName - The event name to bind.
+     * @param callback - The callback function to execute when the event occurs.
+     */
     bind: (
       eventName: EventName | string,
       callback: (event: any) => void
     ) => void;
   };
+
   /**
    * @property Layers
    * @description
@@ -95,10 +127,26 @@ export interface Map {
    * ```
    */
   Layers: {
+    /**
+     * @function setBase
+     * @description Sets the base layer of the map.
+     * @param layer - The name of the base layer.
+     */
     setBase: (layer: string) => void;
+    /**
+     * @function add
+     * @description Adds a layer to the map.
+     * @param layer - The name of the layer to add.
+     */
     add: (layer: string) => void;
+    /**
+     * @function remove
+     * @description Removes a layer from the map.
+     * @param layer - The name of the layer to remove.
+     */
     remove: (layer: string) => void;
   };
+
   /**
    * @property Tags
    * @description
@@ -112,10 +160,25 @@ export interface Map {
    * ```
    */
   Tags: {
+    /**
+     * @function add
+     * @description Adds a tag to the map.
+     * @param tagName - The name of the tag to add.
+     */
     add: (tagName: string) => void;
+    /**
+     * @function remove
+     * @description Removes a tag from the map.
+     * @param tagName - The name of the tag to remove.
+     */
     remove: (tagName: string) => void;
   };
 
+  /**
+   * @property Ui
+   * @description
+   * Provides methods to control the visibility of various UI components on the map.
+   */
   Ui: {
     /**
      * @property DPad
@@ -126,9 +189,14 @@ export interface Map {
      * ```ts
      * map.Ui.DPad.visible(true); // Show DPad
      * map.Ui.DPad.visible(false); // Hide DPad
-     * `
-     * */
+     * ```
+     */
     DPad: {
+      /**
+       * @function visible
+       * @description Shows or hides the DPad.
+       * @param show - Whether to show (true) or hide (false) the DPad.
+       */
       visible: (show: boolean) => void;
     };
     /**
@@ -143,6 +211,11 @@ export interface Map {
      * ```
      */
     Zoombar: {
+      /**
+       * @function visible
+       * @description Shows or hides the Zoombar.
+       * @param show - Whether to show (true) or hide (false) the Zoombar.
+       */
       visible: (show: boolean) => void;
     };
     /**
@@ -157,6 +230,11 @@ export interface Map {
      * ```
      */
     Geolocation: {
+      /**
+       * @function visible
+       * @description Shows or hides the Geolocation button.
+       * @param show - Whether to show (true) or hide (false) the Geolocation button.
+       */
       visible: (show: boolean) => void;
     };
     /**
@@ -171,30 +249,83 @@ export interface Map {
      * ```
      */
     Terrain: {
+      /**
+       * @function visible
+       * @description Shows or hides the Terrain layer.
+       * @param show - Whether to show (true) or hide (false) the Terrain layer.
+       */
       visible: (show: boolean) => void;
     };
+    /**
+     * @property LayerSelector
+     * @description Controls the visibility of the Layer Selector UI.
+     */
     LayerSelector: {
+      /**
+       * @function visible
+       * @description Shows or hides the Layer Selector.
+       * @param show - Whether to show (true) or hide (false) the Layer Selector.
+       */
       visible: (show: boolean) => void;
     };
+    /**
+     * @property Crosshair
+     * @description Controls the visibility of the Crosshair UI.
+     */
     Crosshair: {
+      /**
+       * @function visible
+       * @description Shows or hides the Crosshair.
+       * @param show - Whether to show (true) or hide (false) the Crosshair.
+       */
       visible: (show: boolean) => void;
     };
+    /**
+     * @property Scale
+     * @description Controls the visibility of the Scale UI.
+     */
     Scale: {
+      /**
+       * @function visible
+       * @description Shows or hides the Scale.
+       * @param show - Whether to show (true) or hide (false) the Scale.
+       */
       visible: (show: boolean) => void;
     };
+    /**
+     * @property ContextMenu
+     * @description Controls the visibility of the Context Menu UI.
+     */
     ContextMenu: {
+      /**
+       * @function visible
+       * @description Shows or hides the Context Menu.
+       * @param show - Whether to show (true) or hide (false) the Context Menu.
+       */
       visible: (show: boolean) => void;
     };
+    /**
+     * @property FullScreen
+     * @description Controls the visibility of the FullScreen UI.
+     */
     FullScreen: {
+      /**
+       * @function visible
+       * @description Shows or hides the FullScreen UI.
+       * @param show - Whether to show (true) or hide (false) the FullScreen UI.
+       */
       visible: (show: boolean) => void;
     };
   };
+
   /**
-   * @property language
+   * @function language
    * @description
    * Gets or sets the map's language.
    * - `language()`: Returns the current language code as a string.
    * - `language(lang: string)`: Sets the map's language to the specified code.
+   * @param lang - The language code to set (optional).
+   * @returns {void|string} Returns the current language code if called without arguments, otherwise void.
    * @example
    * ```ts
    * map.language(); // get current language
@@ -202,6 +333,7 @@ export interface Map {
    * ```
    */
   language: (lang?: string) => void | string;
+
   /**
    * @property lastview
    * @description
@@ -211,4 +343,13 @@ export interface Map {
    * @default false
    */
   lastview?: boolean;
+
+  /**
+   * @property Renderer
+   * @description
+   * Provides access to the map's renderer for advanced customizations.
+   */
+  Renderer?: {
+    [key: string]: any;
+  };
 }
