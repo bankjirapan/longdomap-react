@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState, ReactNode, cloneElement } from "react";
 import { LongdoMarkerProps } from "./interface/Marker";
 import { LongdoGeometryProps } from "./components/LongdoGeometry";
@@ -104,6 +103,7 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
     const [isReady, setIsReady] = useState(false);
 
     useEffect(() => {
+        if (typeof window === "undefined") return;
         let destroyed = false;
         loadLongdoMapScript(apiKey).then(() => {
             if (mapContainer.current && window.longdo && !mapRef.current) {
