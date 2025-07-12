@@ -91,6 +91,15 @@ export interface Geometry {
    * @default undefined
    */
   lineColor?: CSSColor; // Line color
+  /**
+   * 
+   * @property fillColor
+   * The fill color of the geometry.
+   * This is applicable for geometries like polygons.
+   * If not specified, the geometry will not be filled.
+   * @default undefined
+   * 
+   */
   fillColor?: CSSColor; // Fill color
   /**
    *
