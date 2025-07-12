@@ -65,7 +65,7 @@ export default App;
 
 **Important:** You need to get an API Key from the [Longdo Map API](https://map.longdo.com/api) website.
 
-## API Reference
+## Components
 
 ### `LongdoMap`
 
