@@ -1,7 +1,7 @@
 # longdomap-react
 
 [![npm version](https://img.shields.io/npm/v/longdomap-react.svg)](https://www.npmjs.com/package/longdomap-react)
-[![CI]](https://github.com/bankjirapan/longdomap-react/actions/workflows/ci.yml/badge.svg)
+[![[CI]](https://github.com/bankjirapan/longdomap-react/actions/workflows/ci.yml/badge.svg)](https://github.com/bankjirapan/longdomap-react/actions/workflows/ci.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Easy-to-use and lightweight React components for Longdo Map, providing a simple way to integrate Longdo Map into your React applications.
