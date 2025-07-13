@@ -145,6 +145,19 @@ export interface Map {
      * @param layer - The name of the layer to remove.
      */
     remove: (layer: string) => void;
+
+    /**
+     *
+     * @function insert
+     * @description Inserts a layer at a specific index in the map's layer stack.
+     * @param layer - The name of the layer to insert.
+     * @param index - The index at which to insert the layer.
+     * @example
+     * ```ts
+     * map.Layers.insert(1,layer1); // Inserts 'layerName' at index 2
+     *
+     */
+    insert: (index: number, layer: string) => void;
   };
 
   /**
