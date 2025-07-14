@@ -14,7 +14,7 @@ declare global {
  */
 export interface Map {
   /**
-   * @function zoom
+   * @property zoom
    * @description
    * Zooms the map to a specified level or zooms in/out based on the boolean value.
    * If zoomLevel is a number, it sets the zoom level directly.
@@ -35,7 +35,7 @@ export interface Map {
   zoom: (zoomLevel?: number | boolean, zoomIn?: boolean) => void | number;
 
   /**
-   * @function location
+   * @property location
    * @description
    * Sets or gets the map's location.
    * If called with a location, sets the map's location to the specified longitude and latitude.
@@ -67,13 +67,13 @@ export interface Map {
    */
   Overlays: {
     /**
-     * @function add
+     * @property add
      * @description Adds an overlay to the map.
      * @param overlay - The overlay object to add.
      */
     add: (overlay: any) => void;
     /**
-     * @function remove
+     * @property remove
      * @description Removes an overlay from the map.
      * @param overlay - The overlay object to remove.
      */
@@ -101,7 +101,7 @@ export interface Map {
    */
   Event: {
     /**
-     * @function bind
+     * @property bind
      * @description Binds an event to the map.
      * @param eventName - The event name to bind.
      * @param callback - The callback function to execute when the event occurs.
@@ -128,27 +128,20 @@ export interface Map {
    */
   Layers: {
     /**
-     * @function setBase
+     * @property setBase
      * @description Sets the base layer of the map.
      * @param layer - The name of the base layer.
      */
-    setBase: (layer: string) => void;
+    setBase: (layer: string | object | any) => void;
     /**
-     * @function add
+     * @property add
      * @description Adds a layer to the map.
      * @param layer - The name of the layer to add.
      */
-    add: (layer: string) => void;
-    /**
-     * @function remove
-     * @description Removes a layer from the map.
-     * @param layer - The name of the layer to remove.
-     */
-    remove: (layer: string) => void;
-
+    add: (layer: string | object | any) => void;
     /**
      *
-     * @function insert
+     * @property insert
      * @description Inserts a layer at a specific index in the map's layer stack.
      * @param layer - The name of the layer to insert.
      * @param index - The index at which to insert the layer.
@@ -157,7 +150,19 @@ export interface Map {
      * map.Layers.insert(1,layer1); // Inserts 'layerName' at index 2
      *
      */
-    insert: (index: number, layer: string) => void;
+    insert: (index: number, layer: string | object | any) => void;
+    /**
+     * @property remove
+     * @description Removes a layer from the map.
+     * @param layer - The name of the layer to remove.
+     */
+    remove: (layer: string | object | any) => void;
+    /**
+     * @property clear
+     * @description Clears all layers from the map. Clear layer is not effective for a base layer.
+     * This method removes all layers, including the base layer.
+     */
+    clear: () => void;
   };
 
   /**
