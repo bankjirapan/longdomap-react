@@ -7,3 +7,4 @@ export * from "./components/LongdoTag";
 export * from "./interface/Map";
 export * from "./interface/Event";
 export * from "./utils/Overlays";
+export * from "./utils/Layer";

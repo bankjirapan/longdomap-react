@@ -16,6 +16,10 @@ Easy-to-use and lightweight React components for Longdo Map, providing a simple 
   - [Marker](#marker)
   - [Popup](#popup)
   - [Geometry](#geometry)
+  - [Properties](#properties)
+    - [Overlays](#overlays)
+    - [Event](#event)
+    - [Layers](#layers)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -113,8 +117,55 @@ Creates a geometric shape on the map (e.g., Circle, Polyline). It accepts all `l
 | `radius`  | `number`                             | -           | The radius for a circle geometry.                                           |
 | `options` | `object`                             | -           | Additional options like `title`, `detail`, `fillColor`, `lineColor`, etc. |
 
+### Properties
 
-### 
+#### Overlays
+
+Overlays are used to manage additional elements on the map, such as markers, popups, and other custom objects.
+
+- `Overlays`: Methods to manage overlays on the map.
+  - `add(overlay: any)`: Adds an overlay to the map.
+  - `remove(overlay: any)`: Removes an overlay from the map.
+
+#### Event
+
+Events allow you to bind custom actions to map events, such as clicks or drags.
+
+- `Event`: Methods to bind events to the map.
+  - `bind(eventName: string, callback: (event: any) => void)`: Binds an event to the map.
+
+#### Layers
+
+Layers are used to manage different map layers, such as base maps and additional layers.
+
+**Longdo Layer example:**
+
+```javascript
+const POLITICAL = LongdoLayer('political');
+map?.Layers.setBase(POLITICAL);
+```
+
+**TMS/WMS/WMTS Layer example:**
+
+```javascript
+const TMS_LAYER = createTMSLayer('',{
+  url: 'https://example.com'
+})
+map?.Layers.add(TMS_LAYER);
+```
+
+**Note:**  
+For TMS/WMS/WMTS layer URLs, enter only the base URL, such as `https://example.com`.  
+The system will automatically append tile parameters. For example, if you enter `https://example.com`, it will be converted to `https://example.com/z/x/y.png` according to the standard tile URL format.
+
+#### How to add or set a layer
+
+- `Layers`: Methods to manage layers on the map.
+  - `setBase(layer: string | object | any)`: Sets the base layer of the map.
+  - `add(layer: string | object | any)`: Adds a layer to the map.
+  - `insert(index: number, layer: string | object | any)`: Inserts a layer at a specific index in the map's layer stack.
+  - `remove(layer: string | object | any)`: Removes a layer from the map.
+  - `clear()`: Clears all layers from the map. Clear layer is not effective for a base layer. This method removes all layers
 
 ## Contributing
 

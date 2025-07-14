@@ -1,7 +1,7 @@
 {
   "name": "longdomap-react",
-  "version": "0.0.4",
-  "description": "Easy-to-use React component for Longdo Map.",
+  "version": "0.0.5",
+  "description": "A React component for integrating Longdo Map into your applications.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -34,7 +34,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bankjirapan/react-longdo-map.git"
+    "url": "https://github.com/bankjirapan/longdomap-react.git"
   },
   "keywords": [
     "react",
