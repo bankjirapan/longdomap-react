@@ -141,7 +141,7 @@ Layers are used to manage different map layers, such as base maps and additional
 **Longdo Layer example:**
 
 ```javascript
-const POLITICAL = LongdoLayer('political');
+const POLITICAL = longdoLayer('political');
 map?.Layers.setBase(POLITICAL);
 ```
 
