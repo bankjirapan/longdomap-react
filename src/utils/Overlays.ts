@@ -175,3 +175,16 @@ export function createDonutPolygon(
   const donut = new window.longdo.Polygon(position, options);
   return donut;
 }
+
+export function createObject(
+  geocode: string,
+  dataset: string,
+  options?: {
+    combine: boolean;
+    simplify: number;
+    ignorefragment: boolean;
+  }
+) {
+  if (!window.longdo) throw new Error("Longdo Map script not loaded");
+  return new longdo.Overlays.Object(geocode, dataset, options);
+};

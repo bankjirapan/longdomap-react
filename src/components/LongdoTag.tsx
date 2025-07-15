@@ -21,7 +21,7 @@ export interface LongdoTagProps {
 }
 
 /**
- * @function LongdoTag
+ * @property LongdoTag
  * @description
  * The `LongdoTag` component is used to add a tag to the Longdo map.
  * @returns null

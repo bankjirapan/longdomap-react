@@ -79,7 +79,7 @@ function createLayer(
  * @returns object representing the Longdo Layer.
  * @see {@link https://api.longdo.com/map3/doc.html#Layers}
  */
-export function LongdoLayer(layerName: string) {
+export function longdoLayer(layerName: string) {
   const layerNameUpper = layerName.toUpperCase();
   if (!window.longdo.Layers[layerNameUpper]) {
     console.warn(`Layer "${layerName}" does not exist in Longdo Layers.`);

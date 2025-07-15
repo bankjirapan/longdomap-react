@@ -8,4 +8,4 @@
 
 ## [Unpublished]
 
-- Initial draft
+- Initial draft of the changelog.
