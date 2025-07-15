@@ -74,16 +74,34 @@ export interface Map {
     add: (overlay: any) => void;
 
     /**
-     * 
-     * @param geocode
-     * @param dataset 
+     * @property load
+     * @description Loads an overlay object into the map.
+     * This method is useful for adding overlays that are not created directly in the current context.
+     * It can be used to load existing overlays from a different source or context.
+     * @param object - The overlay object to load into the map.
+     * @example
+     * ```ts
+     * map.Overlays.load(existingOverlay);
+     * ```
+     * @param longdoObj
      * @returns 
      */
-    Object: (geocode: string, dataset: string, options?: {
-      combine: boolean,
-      simplify: number,
-      ignorefragment: boolean
-    }) => void;
+    load: (object: any) => void;
+
+
+    /**
+     * @property unload
+     * @description Unloads an overlay object from the map.
+     * This method is useful for removing overlays that were previously loaded into the map.
+     * It can be used to clean up resources or remove overlays that are no longer needed.
+     * @example
+     * ```ts
+     * map.Overlays.unload(existingOverlay);
+     * ```
+     * @param longdoObj 
+     * @returns 
+     */
+    unload: (longdoObj: any) => void;
 
     /**
      * @property remove
