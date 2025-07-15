@@ -72,6 +72,19 @@ export interface Map {
      * @param overlay - The overlay object to add.
      */
     add: (overlay: any) => void;
+
+    /**
+     * 
+     * @param geocode
+     * @param dataset 
+     * @returns 
+     */
+    Object: (geocode: string, dataset: string, options?: {
+      combine: boolean,
+      simplify: number,
+      ignorefragment: boolean
+    }) => void;
+
     /**
      * @property remove
      * @description Removes an overlay from the map.
