@@ -155,7 +155,7 @@ map?.Layers.add(TMS_LAYER);
 ```
 
 **Note:**  
-For TMS/WMS/WMTS layer URLs, enter only the base URL, such as `https://example.com`.  
+For TMS layer URLs, enter only the base URL, such as `https://example.com`.  
 The system will automatically append tile parameters. For example, if you enter `https://example.com`, it will be converted to `https://example.com/z/x/y.png` according to the standard tile URL format.
 
 #### How to add or set a layer
