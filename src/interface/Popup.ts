@@ -35,7 +35,7 @@ export interface PopupOptions {
      * Size of the popup.
      * @default 'auto'
      */
-    size?: 'auto' | 'small' | 'medium' | 'large' | string;
+    size?: ({ width?: number; height?: number } | 'auto');
 
     /**
      * Show close button.
