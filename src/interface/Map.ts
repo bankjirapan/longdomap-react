@@ -35,6 +35,18 @@ export interface Map {
   zoom: (zoomLevel?: number | boolean, zoomIn?: boolean) => void | number;
 
   /**
+   * @property zoomRange
+   * @description
+   * Sets or gets the zoom range of the map.
+   * If called with an argument, sets the min and max zoom levels.
+   * If called without arguments, returns the current zoom range.
+   * @param range - An object with min and max zoom levels.
+   * @returns {void|{ min: number; max: number }} Returns the current zoom range if called without arguments, otherwise void.
+   */
+  zoomRange: (range?: { min: number; max: number }) => void | { min: number; max: number };
+  
+
+  /**
    * @property location
    * @description
    * Sets or gets the map's location.
@@ -50,6 +62,26 @@ export interface Map {
     location?: { lon: number; lat: number } | LocationMode,
     animate?: boolean
   ) => void | { lon: number; lat: number };
+
+  /**
+   * @property bound
+   * @description
+   * Sets or gets the map's bounding box.
+   * If called with a bounds object, sets the map's visible area to the specified bounds.
+   * If called without arguments, returns the current bounds.
+   * @param bounds - An object containing minLon, minLat, maxLon, and maxLat.
+   * @returns {void|{ minLon: number; minLat: number; maxLon: number; maxLat: number }} Returns the current bounds if called without arguments, otherwise void.
+   * @example
+   * ```ts
+   * map.bound({
+   *   minLon: 100, minLat: 13,
+   *   maxLon: 101, maxLat: 14
+   * });
+   * ```
+   */
+  bound: (
+    bounds?: { minLon: number; minLat: number; maxLon: number; maxLat: number }
+  ) => void | { minLon: number; minLat: number; maxLon: number; maxLat: number };
 
   /**
    * @property Overlays
