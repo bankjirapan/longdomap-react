@@ -43,8 +43,10 @@ export interface Map {
    * @param range - An object with min and max zoom levels.
    * @returns {void|{ min: number; max: number }} Returns the current zoom range if called without arguments, otherwise void.
    */
-  zoomRange: (range?: { min: number; max: number }) => void | { min: number; max: number };
-  
+  zoomRange: (range?: {
+    min: number;
+    max: number;
+  }) => void | { min: number; max: number };
 
   /**
    * @property location
@@ -79,9 +81,17 @@ export interface Map {
    * });
    * ```
    */
-  bound: (
-    bounds?: { minLon: number; minLat: number; maxLon: number; maxLat: number }
-  ) => void | { minLon: number; minLat: number; maxLon: number; maxLat: number };
+  bound: (bounds?: {
+    minLon: number;
+    minLat: number;
+    maxLon: number;
+    maxLat: number;
+  }) => void | {
+    minLon: number;
+    minLat: number;
+    maxLon: number;
+    maxLat: number;
+  };
 
   /**
    * @property Overlays
@@ -106,46 +116,75 @@ export interface Map {
     add: (overlay: any) => void;
 
     /**
-     * @property load
-     * @description Loads an overlay object into the map.
-     * This method is useful for adding overlays that are not created directly in the current context.
-     * It can be used to load existing overlays from a different source or context.
-     * @param object - The overlay object to load into the map.
-     * @example
-     * ```ts
-     * map.Overlays.load(existingOverlay);
-     * ```
-     * @param longdoObj
-     * @returns 
-     */
-    load: (object: any) => void;
-
-
-    /**
-     * @property unload
-     * @description Unloads an overlay object from the map.
-     * This method is useful for removing overlays that were previously loaded into the map.
-     * It can be used to clean up resources or remove overlays that are no longer needed.
-     * @example
-     * ```ts
-     * map.Overlays.unload(existingOverlay);
-     * ```
-     * @param longdoObj 
-     * @returns 
-     */
-    unload: (longdoObj: any) => void;
-
-    /**
      * @property remove
      * @description Removes an overlay from the map.
      * @param overlay - The overlay object to remove.
      */
     remove: (overlay: any) => void;
+
     /**
-     * @function clear
+     * @property load
+     * @description Loads predefined overlays and adds them to the map.
+     * @param mode - Predefined overlays mode.
+     */
+    load: (mode: any) => void;
+
+    /**
+     * @property unload
+     * @description Removes predefined overlays from the map.
+     * @param mode - Predefined overlays mode.
+     */
+    unload: (mode: any) => void;
+
+    /**
+     * @property clear
      * @description Removes all overlays from the map.
      */
     clear: () => void;
+
+    /**
+     * @property list
+     * @description Lists all overlays on the map.
+     * @returns {any[]} List of overlays.
+     */
+    list: () => any[];
+
+    /**
+     * @property size
+     * @description Returns the number of overlays on the map.
+     * @returns {number} Size.
+     */
+    size: () => number;
+
+    /**
+     * @property drop
+     * @description Adds a marker to the map with drop animation.
+     * @param overlay - Marker overlay.
+     */
+    drop: (overlay: any) => void;
+
+    /**
+     * @property bounce
+     * @description Shows bounce animation of a marker.
+     * @param overlay - Marker overlay.
+     */
+    bounce: (overlay: any) => void;
+
+    /**
+     * @property lastOpenPopup
+     * @description Gets the last open popup.
+     * @returns {any} Last open popup.
+     */
+    lastOpenPopup: () => any;
+
+    /**
+     * @property pathAnimation
+     * @description Moves marker along the line.
+     * @param marker - The marker to move.
+     * @param path - Motion path (Polyline).
+     * @param speed - Speed (optional, default: 2^-zoom).
+     */
+    pathAnimation: (marker: any, path: any, speed?: number) => void;
   };
 
   /**
