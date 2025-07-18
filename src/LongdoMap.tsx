@@ -104,7 +104,6 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
 
     useEffect(() => {
         if (typeof window === "undefined") return;
-        let destroyed = false;
         loadLongdoMapScript(apiKey).then(() => {
             if (mapContainer.current && window.longdo && !mapRef.current) {
                 mapRef.current = new window.longdo.Map({
@@ -116,7 +115,6 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
                 });
 
                 mapRef.current.Event.bind(window.longdo.EventName.Ready, () => {
-                    if (destroyed) return;
                     setIsReady(true);
                     if (typeof mapObj === "function") {
                         mapObj(mapRef.current);
@@ -124,9 +122,7 @@ export const LongdoMap: React.FC<LongdoMapProps> = ({
                 });
             }
         });
-
         return () => {
-            destroyed = true;
             if (mapRef.current) {
                 mapRef.current.Overlays.clear();
                 mapRef.current = null;
