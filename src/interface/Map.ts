@@ -94,6 +94,135 @@ export interface Map {
   };
 
   /**
+   * @property resize
+   * @description
+   * Resizes the map to fit the current container size.
+   * This method is useful when the map's container size changes, such as during window resizing.
+   * It recalculates the map's dimensions and updates the view accordingly.
+   * @example
+   * ```ts
+   * map.resize();
+   * ```
+   */
+  resize: () => void;
+
+  /**
+   * @property Route
+   * @description
+   * Provides methods to manage routes on the map.
+   * - `add(route: any)`: Adds a route to the map.
+   * - `remove(route: any)`: Removes a route from the map.
+   * - `clear()`: Clears all routes from the map.
+   * @example
+   * ```ts
+   * map.Route.add(route);
+   * map.Route.remove(route);
+   * map.Route.clear();
+   * ```
+   */
+  Route: {
+    /**
+     * @property add
+     * @description Adds a route to the map.
+     * @param route - The route object to add.
+     */
+    add: (route: any) => void;
+
+    /**
+     * @property remove
+     * @description Removes a route from the map.
+     * @param route - The route object to remove.
+     */
+    remove: (route: any) => void;
+
+    /**
+     * @property clear
+     * @description Clears all routes from the map.
+     */
+    clear: () => void;
+
+    /**
+     *
+     * @property mode
+     * @description
+     * Sets or gets the route mode.
+     * If called with a mode, sets the route mode to the specified value.
+     * If called without arguments, returns the current route mode.
+     * @param mode - The route mode to set (e.g., "car", "walk", etc.).
+     * @returns {void|string} Returns the current route mode if called without arguments, otherwise void.
+     * @example
+     * ```ts
+     * map.Route.mode("car");
+     * ```
+     */
+    mode: (mode?: string) => void | string;
+
+    /**
+     * @property list
+     * @description
+     * Lists all routes currently on the map.
+     * @returns {any[]} An array of route objects currently on the map.
+     */
+    list: () => any[];
+
+    /**
+     * @property size
+     * @description
+     * Returns the number of routes currently on the map.
+     * @returns {number} The number of routes.
+     */
+    size: () => number;
+
+    /**
+     * 
+     * @property distance
+     * @description
+     * Calculates the total distance of all routes currently on the map.
+     * @returns {number} The total distance in meters.
+     * @example
+     * ```ts
+     * const totalDistance = map.Route.distance();
+     * ```  
+     */
+    distance: () => number;
+  };
+
+  /**
+   * @property Rotage
+   * @description
+   * Provides methods to manage the map's rotation.
+   * - `rotage(angle: number, animate?: boolean)`: Rotates the map to the specified angle.
+   * @example
+   * ```ts
+   * map.rotage(45, true);
+   * ```
+   */
+  rotage: (angle: number, animate?: boolean) => void;
+
+  /**
+   * @property Pitch
+   * @description
+   * Provides methods to manage the map's pitch.
+   * - `pitch(angle: number, animate?: boolean)`: Sets the map's pitch to the specified angle.
+   * @example
+   * ```ts
+   * map.pitch(30, true);
+   * ```
+   */
+  pitch: (angle: number, animate?: boolean) => void;
+
+  /**
+   *
+   * @property Search
+   * @description
+   * Provides methods to perform search operations on the map.
+   * @example
+   * ```ts
+   * map.Search();
+   */
+  Search: () => void;
+
+  /**
    * @property Overlays
    * @description
    * Provides methods to manage overlays on the map.

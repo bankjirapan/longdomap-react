@@ -2,6 +2,12 @@
 
 ## [Published]
 
+1.0.0
+
+- feat: add missing properties to Map interface
+- feat: add support for zoomRange and bound properties in Map interface
+- fix: ensure map is ready before invoking callback
+
 0.0.8
 
 - fix: ensure map is ready before invoking callback

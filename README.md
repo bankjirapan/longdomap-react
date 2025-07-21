@@ -11,15 +11,22 @@ Easy-to-use and lightweight React components for Longdo Map, providing a simple 
 - [Features](#features)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
-- [API Reference](#api-reference)
+- [Components API](#components-api)
   - [LongdoMap](#longdomap)
   - [Marker](#marker)
   - [Popup](#popup)
   - [Geometry](#geometry)
-  - [Properties](#properties)
-    - [Overlays](#overlays)
-    - [Event](#event)
-    - [Layers](#layers)
+  - [Layer](#layer)
+  - [LongdoTag](#longdotag)
+- [Map Instance API](#map-instance-api)
+  - [Overlays](#overlays)
+  - [Event](#event)
+  - [Layers](#layers)
+  - [Tags](#tags)
+  - [UI Controls](#ui-controls)
+- [Utilities](#utilities)
+  - [Overlay Creators](#overlay-creators)
+  - [Layer Creators](#layer-creators)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -69,103 +76,158 @@ export default App;
 
 **Important:** You need to get an API Key from the [Longdo Map API](https://map.longdo.com/api) website.
 
-## Components
+## Components API
 
 ### `LongdoMap`
 
-The main map container. It accepts all official `longdo.MapOptions` as props.
+The main map container component.
 
-| Prop       | Type                               | Default     | Description                                               |
-|------------|------------------------------------|-------------|-----------------------------------------------------------|
-| `apiKey`   | `string`                           | **Required**| Your Longdo Map API Key.                                  |
-| `id`       | `string`                           | `longdo-map`| The ID for the map container element.                     |
-| `location` | `{ lon: number, lat: number }`     | -           | The initial map center.                                   |
-| `zoom`     | `number`                           | -           | The initial map zoom level.                               |
-| `baseMap`  | `longdo.BaseMap`                   | `NORMAL`    | The initial base map layer.                               |
-| `mapObj`   | `(map: longdo.Map) => void`        | -           | A callback function that returns the `longdo.Map` instance. |
-| `height`   | `string \| number`                 | `100%`      | The height of the map container.                          |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `apiKey` | `string` | **Required** | The API key for Longdo Map service. |
+| `mapObj` | `(map: any) => void` | - | Callback that receives the Longdo map object once it is ready. |
+| `location` | `{ lon: number; lat: number; }` | `{ lon: 100.529248, lat: 13.672898 }` | Initial map location (Bangkok). |
+| `zoom` | `number` | `10` | Initial map zoom level. |
+| `baseMap` | `string` | `"NORMAL"` | The base map to use. See [Longdo Docs](https://api.longdo.com/map3/doc.html#Layers) for available layers. |
+| `height` | `string \| number` | `400` | Height of the map container. |
+| `width` | `string \| number` | `"100%"` | Width of the map container. |
+| `className` | `string` | `""` | Optional CSS class for the container. |
+| `children` | `ReactNode` | - | Child components like `Marker`, `Popup`, `Geometry`, etc. |
 
 ### `Marker`
 
-Creates a marker on the map. It accepts all `longdo.MarkerOptions` as props.
+Creates a marker on the map.
 
-| Prop       | Type                               | Default     | Description                                               |
-|------------|------------------------------------|-------------|-----------------------------------------------------------|
-| `position` | `{ lon: number, lat: number }`     | **Required**| The position of the marker.                                 |
-| `title`    | `string`                           | -           | The title of the marker (tooltip).                        |
-| `detail`   | `string`                           | -           | The detail text shown in the popup.                       |
-| `onClick`  | `(marker: longdo.Marker) => void`  | -           | A callback for the click event.                           |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `{ lon: number, lat: number }` | **Required** | The position of the marker. |
+| `title` | `string` | - | The title of the marker (shows on hover). |
+| `detail` | `string` | - | The detail text shown in the popup on click. |
+| `icon` | `{ url: string; offset?: { x: number; y: number }; }` | - | Custom marker icon. |
+| `visibleRange` | `{ min: number; max: number }` | - | The zoom level range where the marker is visible. |
+| `draggable` | `boolean` | `false` | Allows the marker to be dragged by the user. |
 
 ### `Popup`
 
 Creates a popup on the map.
 
-| Prop       | Type                               | Default     | Description                                               |
-|------------|------------------------------------|-------------|-----------------------------------------------------------|
-| `position` | `{ lon: number, lat: number }`     | **Required**| The position of the popup.                                  |
-| `title`    | `string`                           | -           | The title of the popup.                                   |
-| `detail`   | `string`                           | -           | The detail content of the popup.                          |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `{ lon: number, lat: number }` | **Required** | The position of the popup. |
+| `title` | `string` | `'Popup'` | The title displayed at the top of the popup. |
+| `detail` | `string` | `'This is a popup'` | Additional information displayed in the popup. |
+| `html` | `string` | - | Custom HTML content to display inside the popup. |
+| `closable` | `boolean` | `true` | If `true`, the popup will have a close button. |
+| `size` | `{ width: number; height: number }` | `{ width: 200, height: 100 }` | The size of the popup. |
 
 ### `Geometry`
 
-Creates a geometric shape on the map (e.g., Circle, Polyline). It accepts all `longdo.GeometryOptions` as props.
+Creates various geometric shapes on the map.
 
-| Prop      | Type                                 | Default     | Description                                                                 |
-|-----------|--------------------------------------|-------------|-----------------------------------------------------------------------------|
-| `type`    | `string`                             | **Required**| The geometry type (e.g., `circle`, `polyline`, `polygon`).                  |
-| `points`  | `{ lon: number, lat: number }[]`     | **Required**| An array of points to draw the geometry.                                    |
-| `radius`  | `number`                             | -           | The radius for a circle geometry.                                           |
-| `options` | `object`                             | -           | Additional options like `title`, `detail`, `fillColor`, `lineColor`, etc. |
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `type` | `'polyline' \| 'polygon' \| 'circle' \| 'donut' \| 'rectangle'` | **Required** | The type of geometry to render. |
+| `points` | `({ lon: number; lat: number } \| null)[]` | **Required** | An array of coordinate objects for the geometry's vertices. |
+| `radius` | `number` | - | The radius of the geometry, used for the "circle" type. |
+| `options` | `object` | - | Additional options for customizing appearance (e.g., `lineColor`, `lineWidth`, `fillColor`, `title`). |
 
-### Properties
+### `Layer`
 
-#### Overlays
+Adds a predefined layer to the map.
 
-Overlays are used to manage additional elements on the map, such as markers, popups, and other custom objects.
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layerName` | `string` | **Required** | The name of the layer to add. See [Longdo Docs](https://api.longdo.com/map3/doc.html#Layers) for available layers. |
 
-- `Overlays`: Methods to manage overlays on the map.
-  - `add(overlay: any)`: Adds an overlay to the map.
-  - `remove(overlay: any)`: Removes an overlay from the map.
+### `LongdoTag`
 
-#### Event
+Adds a tag overlay to the map, showing points of interest.
 
-Events allow you to bind custom actions to map events, such as clicks or drags.
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tagName` | `string` | **Required** | The tag to apply to the map (e.g., "hotel"). See [Tag List](https://map.longdo.com/ws/tag/list). |
 
-- `Event`: Methods to bind events to the map.
-  - `bind(eventName: string, callback: (event: any) => void)`: Binds an event to the map.
+## Map Instance API
 
-#### Layers
+You can get the map instance using the `mapObj` prop on the `<LongdoMap>` component. This object provides access to the full Longdo Map API.
 
-Layers are used to manage different map layers, such as base maps and additional layers.
+### Overlays
 
-**Longdo Layer example:**
+Manage elements on the map. Accessed via `map.Overlays`.
+
+- `add(overlay: any)`: Adds an overlay (marker, geometry, etc.).
+- `remove(overlay: any)`: Removes a specific overlay.
+- `clear()`: Removes all overlays.
+- `list()`: Returns an array of all overlays on the map.
+
+### Event
+
+Bind callbacks to map events. Accessed via `map.Event`.
+
+- `bind(eventName: string, callback: (event: any) => void)`: Binds a function to a map event.
+  - **Common Events:** `click`, `doubleClick`, `drag`, `drop`, `zoom`, `ready`, `overlayClick`. See `EventName` enum in `src/interface/Event.ts` for a full list.
+
+### Layers
+
+Manage map layers. Accessed via `map.Layers`.
+
+- `setBase(layer: object)`: Sets the base map layer.
+- `add(layer: object)`: Adds an additional layer.
+- `remove(layer: object)`: Removes a layer.
+- `clear()`: Clears all additional layers.
+
+### Tags
+
+Manage POI tags. Accessed via `map.Tags`.
+
+- `add(tagName: string)`: Adds a tag layer.
+- `remove(tagName: string)`: Removes a tag layer.
+
+### UI Controls
+
+Control the visibility of map UI elements. Accessed via `map.Ui`.
+
+- `DPad.visible(boolean)`
+- `Zoombar.visible(boolean)`
+- `Geolocation.visible(boolean)`
+- `Toolbar.visible(boolean)`
+- `LayerSelector.visible(boolean)`
+- `Scale.visible(boolean)`
+
+## Utilities
+
+The library exports several utility functions to create Longdo Map objects programmatically.
+
+### Overlay Creators
+
+These functions create overlay objects that can be added to the map using `map.Overlays.add()`.
+
+- `createLongdoMarker(position, options)`
+- `createPopup(position, options)`
+- `createPolygon(points, options)`
+- `createPolyline(points, options)`
+- `createCircle(center, radius, options)`
+- `createRectangle(bounds, options)`
+- `createDot(position, options)`
+
+### Layer Creators
+
+Use these functions to create layer objects for use with `map.Layers.add()` or `map.Layers.setBase()`.
+
+- `longdoLayer(layerName: string)`: Gets a predefined Longdo layer (e.g., `NORMAL`, `POLITICAL`).
+- `createWMSLayer(layerName, options)`
+- `createWMTSLayer(layerName, options)`
+- `createTMSLayer(layerName, options)`
+
+**TMS Layer Example:**
 
 ```javascript
-const POLITICAL = longdoLayer('political');
-map?.Layers.setBase(POLITICAL);
+// The system automatically formats the URL to the correct tile format (e.g., /z/x/y.png)
+const tmsLayer = createTMSLayer('', {
+  url: 'https://mytileserver.com/tiles'
+});
+map?.Layers.add(tmsLayer);
 ```
-
-**TMS/WMS/WMTS Layer example:**
-
-```javascript
-const TMS_LAYER = createTMSLayer('',{
-  url: 'https://example.com'
-})
-map?.Layers.add(TMS_LAYER);
-```
-
-**Note:**  
-For TMS layer URLs, enter only the base URL, such as `https://example.com`.  
-The system will automatically append tile parameters. For example, if you enter `https://example.com`, it will be converted to `https://example.com/z/x/y.png` according to the standard tile URL format.
-
-#### How to add or set a layer
-
-- `Layers`: Methods to manage layers on the map.
-  - `setBase(layer: string | object | any)`: Sets the base layer of the map.
-  - `add(layer: string | object | any)`: Adds a layer to the map.
-  - `insert(index: number, layer: string | object | any)`: Inserts a layer at a specific index in the map's layer stack.
-  - `remove(layer: string | object | any)`: Removes a layer from the map.
-  - `clear()`: Clears all layers from the map. Clear layer is not effective for a base layer. This method removes all layers
 
 ## Contributing
 
