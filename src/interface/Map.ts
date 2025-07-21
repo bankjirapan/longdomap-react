@@ -195,6 +195,7 @@ export interface Map {
    * @example
    * ```ts
    * map.rotage(45, true);
+   * ```
    */
   rotage: (angle: number, animate?: boolean) => void;
 
@@ -206,6 +207,7 @@ export interface Map {
    * @example
    * ```ts
    * map.pitch(30, true);
+   * ```
    */
   pitch: (angle: number, animate?: boolean) => void;
 
