@@ -1,6 +1,6 @@
 {
   "name": "longdomap-react",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "A React component for integrating Longdo Map into your applications.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

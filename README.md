@@ -154,6 +154,7 @@ You can get the map instance using the `mapObj` prop on the `<LongdoMap>` compon
 ### Overlays
 
 Manage elements on the map. Accessed via `map.Overlays`.
+
 - `add(overlay: any)`: Adds an overlay (marker, geometry, etc.).
 - `remove(overlay: any)`: Removes a specific overlay.
 - `clear()`: Removes all overlays.
@@ -162,12 +163,14 @@ Manage elements on the map. Accessed via `map.Overlays`.
 ### Event
 
 Bind callbacks to map events. Accessed via `map.Event`.
+
 - `bind(eventName: string, callback: (event: any) => void)`: Binds a function to a map event.
   - **Common Events:** `click`, `doubleClick`, `drag`, `drop`, `zoom`, `ready`, `overlayClick`. See `EventName` enum in `src/interface/Event.ts` for a full list.
 
 ### Layers
 
 Manage map layers. Accessed via `map.Layers`.
+
 - `setBase(layer: object)`: Sets the base map layer.
 - `add(layer: object)`: Adds an additional layer.
 - `remove(layer: object)`: Removes a layer.
@@ -176,12 +179,14 @@ Manage map layers. Accessed via `map.Layers`.
 ### Tags
 
 Manage POI tags. Accessed via `map.Tags`.
+
 - `add(tagName: string)`: Adds a tag layer.
 - `remove(tagName: string)`: Removes a tag layer.
 
 ### UI Controls
 
 Control the visibility of map UI elements. Accessed via `map.Ui`.
+
 - `DPad.visible(boolean)`
 - `Zoombar.visible(boolean)`
 - `Geolocation.visible(boolean)`
@@ -215,9 +220,10 @@ Use these functions to create layer objects for use with `map.Layers.add()` or `
 - `createTMSLayer(layerName, options)`
 
 **TMS Layer Example:**
+
 ```javascript
 // The system automatically formats the URL to the correct tile format (e.g., /z/x/y.png)
-const tmsLayer = createTMSLayer('My TMS Layer', {
+const tmsLayer = createTMSLayer('', {
   url: 'https://mytileserver.com/tiles'
 });
 map?.Layers.add(tmsLayer);
