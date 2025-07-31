@@ -4,7 +4,7 @@ import { PopupOptions } from "../interface/Popup";
 interface LongdoMarkerProps {
   title?: string;
   icon?: {
-    url: string;
+    url?: string;
     offset?: { x: number; y: number };
     size?: { width: number; height: number };
     html?: string;
