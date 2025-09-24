@@ -185,6 +185,18 @@ export interface Map {
      * ```  
      */
     distance: () => number;
+
+    /**
+     * @property search
+     * @description Performs a search operation related to routes on the map.
+     * This method can be used to find routes based on specific criteria or parameters.
+     * Before using this method, ensure added Map.Route.add(route) two points.
+     * @example
+     * ```ts
+     * map.Route.search();
+     * ```
+     */
+    search: () => void;
   };
 
   /**
