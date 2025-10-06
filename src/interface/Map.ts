@@ -185,19 +185,31 @@ export interface Map {
      * ```  
      */
     distance: () => number;
+
+    /**
+     * @property search
+     * @description Performs a search operation related to routes on the map.
+     * This method can be used to find routes based on specific criteria or parameters.
+     * Before using this method, ensure added Map.Route.add(route) two points.
+     * @example
+     * ```ts
+     * map.Route.search();
+     * ```
+     */
+    search: () => void;
   };
 
   /**
-   * @property Rotage
+   * @property Rotate
    * @description
    * Provides methods to manage the map's rotation.
-   * - `rotage(angle: number, animate?: boolean)`: Rotates the map to the specified angle.
+   * - `rotate(angle: number, animate?: boolean)`: Rotates the map to the specified angle.
    * @example
    * ```ts
-   * map.rotage(45, true);
+   * map.rotate(45, true);
    * ```
    */
-  rotage: (angle: number, animate?: boolean) => void;
+  rotate: (angle: number, animate?: boolean) => void;
 
   /**
    * @property Pitch
